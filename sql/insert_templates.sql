@@ -1,5 +1,5 @@
-INSERT INTO `webshop`.`clientes` (`id`, `nome`, `cpf`, `telefone`, `senha`) 
-VALUES (NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `webshop`.`clientes` (`id`, `nome`, `email`, `cpf`, `telefone`, `senha`) 
+VALUES (NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT INTO `webshop`.`enderecos` (`id`, `desc`, `rua`, `numero`, `bairro`, `cidade`, `cep`, `clientes_id`) 
 VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
