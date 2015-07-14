@@ -1,14 +1,9 @@
-INSERT INTO `webshop`.`clientes` (`id`, `nome`, `email`, `cpf`, `telefone`, `senha`) 
-VALUES (NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `webshop`.`clients` (`id`, `name`, `email`, `cpf`, `telephone`, `password`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL);
 
-INSERT INTO `webshop`.`enderecos` (`id`, `desc`, `rua`, `numero`, `bairro`, `cidade`, `cep`, `clientes_id`) 
-VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `webshop`.`adresses` (`id`, `desc`, `street`, `number`, `bairro`, `city`, `zip`, `clients_id`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
-INSERT INTO `webshop`.`pedidos` (`id`, `data_compra`, `data_mod`, `status`, `valor_produtos`, `valor_frete`, `descontos`, `clientes_id`) 
-VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `webshop`.`orders` (`id`, `data_order`, `data_mod`, `status`, `price_products`, `price_shipping`, `discounts`, `clientes_id`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
-INSERT INTO `webshop`.`produtos` (`id`, `nome`, `desc`, `valor`) 
-VALUES (NULL, NULL, NULL, NULL);
+INSERT INTO `webshop`.`products` (`id`, `name`, `desc`, `price`) VALUES (NULL, NULL, NULL, NULL);
 
-INSERT INTO `webshop`.`pedidos_has_produtos` (`pedidos_id`, `produtos_id`) 
-VALUES (NULL, NULL);
+INSERT INTO `webshop`.`orders_has_products` (`orders_id`, `products_id`) VALUES (NULL, NULL);
