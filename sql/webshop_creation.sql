@@ -51,16 +51,15 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `webshop`.`adresses`
+-- Table `webshop`.`addresses`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `webshop`.`adresses` ;
+DROP TABLE IF EXISTS `webshop`.`addresses` ;
 
-CREATE TABLE IF NOT EXISTS `webshop`.`adresses` (
+CREATE TABLE IF NOT EXISTS `webshop`.`addresses` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `desc` VARCHAR(45) NOT NULL COMMENT '',
   `street` VARCHAR(45) NOT NULL COMMENT '',
   `number` INT NOT NULL COMMENT '',
-  `bairro` VARCHAR(25) NOT NULL COMMENT '',
   `city` VARCHAR(25) NOT NULL COMMENT '',
   `zip` VARCHAR(8) NOT NULL COMMENT '',
   `clients_id` INT NOT NULL COMMENT '',
