@@ -61,10 +61,27 @@ $app->delete("/client/:id", function ($id) use ($app) {
 	echo $response;
 });
 
+$app->get('/products', function () use ($app) {
+  $db = getDB();
+	
+	$products = array();
+	foreach($db->products() as $product) {
+		$products[] = array(
+			'id' => $product['id'],
+			'name' => $product['name'],
+			'desc' => $product['desc'],
+            'value' => $product['price']
+		);
+	}
+	
+	$app->response()->header('Content-Type', 'application/json');
+	echo json_encode($products);
+});
+
 function getConnection() {
-	$dbhost = "127.0.0.1";
-	$dbuser = "root";
-	$dbpass = "root";
+	$dbhost = getenv('IP');
+	$dbuser = getenv('C9_USER');
+	$dbpass = "";
 	$dbname = "webshop";
 	$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
