@@ -2,57 +2,19 @@ var AddressService = {
 
 	list: [],
 	
-	add: function(Address, callback) {
+	add: function(address, callback) {
 		$.ajax({
 			type: 'POST',
 			contentType: 'application/json',
-			url: 'api/Address',
-			data: JSON.stringify(Address),
+			url: 'api/newaddress',
+			data: JSON.stringify(address),
 			success: function(addedAddress) {
-				console.log('Address created!');
+				console.log('address created!');
 				callback(addedAddress);
 			},
 			error: function() {
-				console.log('Error to add Address ' + Address.name);
+				console.log('Error to add address ' + address.des);
 			}
 		});
-	},
-	
-	remove: function(id, callback) {
-		$.ajax({
-			type: 'DELETE',
-			url: 'api/Address/' + id,
-			success: function(response) {
-				console.log('Address deleted!');
-				callback(true);
-			},
-			error: function(jqXHR) {
-				console.log('Error to delete Address with id ' + id);
-				callback(false);
-			}
-		});
-	},
-	
-	getList: function(callback) {
-		$.ajax({
-			type: 'GET',
-			url: 'api/Addresss',
-			dataType: 'json',
-			success: function(list) {
-				callback(list);
-			}
-		});
-	},
-	
-	saveToLocalStorage: function () {
-		var listJson = JSON.stringify(AddressService.list);
-		window.localStorage.setItem('Addresslist', listJson);
-	},
-	
-	retrieveFromLocalStorage: function () {
-		var listJson = window.localStorage.getItem('Addresslist');
-		if(listJson) {
-			AddressService.list = JSON.parse(listJson);
-		}
 	}
 }

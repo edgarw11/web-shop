@@ -5,5 +5,7 @@
 require "verify.php";
 echo $_SESSION["client_name"] . ' ,welcome to webshop!';
 echo " | <a href=\"logout.php\">Logout</a>";
+echo '<script src="assets/js/LoginService.js"></script>';
+echo '<script src="assets/js/LoginController.js"></script>';
 
 ?>

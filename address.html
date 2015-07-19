@@ -49,14 +49,21 @@
 		<div class="pure-controls">
 			<button type="submit" class="pure-button pure-button-primary">Submit</button>
 		</div>
+		
+		<div class="pure-controls">
+			<button type="button" class="pure-button pure-button-primary" onclick="SessionController.logout()">Logout</button>
+		</div>
+		
 	</fieldset>
 </form>
-
+		
 <section id="clientList">
 </section>
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/blueimp-md5/js/md5.min.js"></script>
+<script src="assets/js/SessionService.js"></script>
+<script src="assets/js/SessionController.js"></script>
 <script src="assets/js/AddressService.js"></script>
 <script src="assets/js/AddressController.js"></script>
 

@@ -7,9 +7,25 @@ $app->get('/', function () {
 	echo 'APIs are up and running!';
 });
 
+// ########## LOGIN SERVICES  #######################
+$app->get('/logout', function () use ($app) {
+ 
+ 	error_log("logout function");
+ 	session_start(); 
+    session_destroy();
+	
+    // Client not logged in
+    $response = json_encode(array(
+		'status' => true
+	));
+	
+	$app->response()->header('Content-Type', 'application/json');
+	echo $response;
+});
+
 $app->get('/verify', function () use ($app) {
  
- 	error_log("funcao verify");
+ 	error_log("verify login function");
  	session_start(); 
 	// Check if the session is already set.
 	if(!isset($_SESSION["client_id"]) || !isset($_SESSION["client_name"])) 
@@ -20,7 +36,7 @@ $app->get('/verify', function () use ($app) {
 				'status' => false
 		));
 	} else {
-		error_log("sessao valida");
+		error_log("session validated");
 		$verified = json_encode(array(
 				'status' => true,
 				'client_id' => $_SESSION['client_id'],
@@ -65,6 +81,7 @@ $app->post("/loguser", function () use ($app) {
 	echo $response;
 });
 
+// ########## CLIENTS SERVICES  #######################
 $app->get('/clients', function () use ($app) {
   $db = getDB();
 	
@@ -84,7 +101,6 @@ $app->get('/clients', function () use ($app) {
 });
 
 $app->post("/client", function () use ($app) {
-	echo 'Funciont client IN.';
 	$db = getDB();
 	
 	$client = json_decode($app->request->getBody(), true);
@@ -94,31 +110,23 @@ $app->post("/client", function () use ($app) {
 	echo json_encode($result);
 });
 
-$app->delete("/client/:id", function ($id) use ($app) {
+// ########## ADDRESSES SERVICES  #######################
+$app->post("/newaddress", function () use ($app) {
 	$db = getDB();
-	$response = "";
 	
-	$client = $db->clients()->where("id", $id);
-	
-	if ($client->fetch()) {
-		$result = $client->delete();
-		$response = json_encode(array(
-				"status" => true,
-				"message" => "client deleted successfully"
-		));
-	}
-	else {
-		$response = json_encode(array(
-				"status" => false,
-				"message" => "client id $id does not exist"
-		));
-		$app->response->setStatus(404);
-	}
+	error_log($app->request->getBody());
+	$addressobj = json_decode($app->request->getBody(), true);
+	error_log('passou pelo stringify');
+	$result = $db->addresses->insert($addressobj);
+	error_log('passou pelo banco');
+	error_log($result);
 	
 	$app->response()->header("Content-Type", "application/json");
-	echo $response;
+	$resultjson = json_encode($result);
+	echo $resultjson;
 });
 
+// ########## PRODUCT SERVICES  #######################
 $app->get('/products', function () use ($app) {
   $db = getDB();
 	
@@ -136,6 +144,7 @@ $app->get('/products', function () use ($app) {
 	echo json_encode($products);
 });
 
+// ########## DATABASE SERVICES  #######################
 function getConnection() {
 	$dbhost = getenv('IP');
 	$dbuser = getenv('C9_USER');
