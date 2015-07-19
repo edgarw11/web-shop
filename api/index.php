@@ -7,6 +7,64 @@ $app->get('/', function () {
 	echo 'APIs are up and running!';
 });
 
+$app->get('/verify', function () use ($app) {
+ 
+ 	error_log("funcao verify");
+ 	session_start(); 
+	// Check if the session is already set.
+	if(!isset($_SESSION["client_id"]) || !isset($_SESSION["client_name"])) 
+	{ 
+		error_log("no session");
+    	// Client not logged in
+    	$verified = json_encode(array(
+				'status' => false
+		));
+	} else {
+		error_log("sessao valida");
+		$verified = json_encode(array(
+				'status' => true,
+				'client_id' => $_SESSION['client_id'],
+				'client_name' => $_SESSION['client_name']
+		));
+		error_log($verified);
+	}
+	$app->response()->header('Content-Type', 'application/json');
+	echo $verified;
+});
+
+$app->post("/loguser", function () use ($app) {
+	$db = getDB();
+	
+	$clientreq = json_decode($app->request->getBody(), true);
+	$sql = $db->clients()->where("password", $clientreq['password'])->and("email", $clientreq['email']);
+	
+	if ($client = $sql->fetch()) {
+		
+		$response = json_encode(array(
+				'status' => true,
+				'message' => "client logged successfully",
+				'id' => $client['id'],
+				'name' => $client['name'],
+				'email' => $client['email'],
+				'cpf' => $client['cpf'],
+				'telephone' => $client['telephone']
+		));
+		session_start();
+		$_SESSION['client_id']= $client['id'];
+		$_SESSION['client_name']= $client['name'];
+	}
+	else {
+		error_log('Login failed');
+		$response = json_encode(array(
+				'status' => false,
+				'message' => "The email or password are incorrect. Please try again."
+		));
+	}
+	
+	$app->response()->header("Content-Type", "application/json");
+	echo $response;
+});
+
 $app->get('/clients', function () use ($app) {
   $db = getDB();
 	
@@ -17,8 +75,7 @@ $app->get('/clients', function () use ($app) {
 			'name' => $client['name'],
 			'email' => $client['email'],
             'cpf' => $client['cpf'],
-            'telephone' => $client['telephone'],
-            'password' => $client['password']
+            'telephone' => $client['telephone']
 		);
 	}
 	
@@ -27,6 +84,7 @@ $app->get('/clients', function () use ($app) {
 });
 
 $app->post("/client", function () use ($app) {
+	echo 'Funciont client IN.';
 	$db = getDB();
 	
 	$client = json_decode($app->request->getBody(), true);
@@ -70,7 +128,7 @@ $app->get('/products', function () use ($app) {
 			'id' => $product['id'],
 			'name' => $product['name'],
 			'desc' => $product['desc'],
-            'value' => $product['price']
+            'price' => $product['price']
 		);
 	}
 	

@@ -2,31 +2,30 @@ var LoginService = {
 
 	list: [],
 	
-	login: function(client, callback) {
+	verify: function(callback) {
 		$.ajax({
-			type: 'POST',
-			contentType: 'application/json',
-			url: 'api/login',
-			data: JSON.stringify(client),
-			success: function(logedClient) {
-				console.log('Client loged in!');
-				callback(addedClient);
-			},
-			error: function() {
-				console.log('Error validating client ' + client.name);
+			type: 'GET',
+			url: 'api/verify',
+			dataType: 'json',
+			success: function(verified) {
+				callback(verified);
 			}
 		});
 	},
 	
-	saveToLocalStorage: function () {
-		var listJson = JSON.stringify(ClientService.list);
-		window.localStorage.setItem('clientlist', listJson);
-	},
-	
-	retrieveFromLocalStorage: function () {
-		var listJson = window.localStorage.getItem('clientlist');
-		if(listJson) {
-			ClientService.list = JSON.parse(listJson);
-		}
+	login: function(client, callback) {
+		$.ajax({
+			type: 'POST',
+			contentType: 'application/json',
+			url: 'api/loguser',
+			data: JSON.stringify(client),
+			success: function(loggedClient) {
+				console.log('success.');
+				callback(loggedClient);
+			},
+			error: function() {
+				console.log('Error validating client ' + client.email);
+			}
+		});
 	}
 }

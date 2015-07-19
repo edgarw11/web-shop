@@ -8,6 +8,7 @@ var ClientController = {
 	setForm: function () {
 		var form = document.querySelector('form');
 		form.addEventListener('submit', function(event) {
+			console.log("Execute submit.");
 			ClientController.addClient(form);
 			//it is to avoid form submition
 			event.preventDefault();
@@ -17,6 +18,7 @@ var ClientController = {
 	},
 	
 	setFocus: function() {
+		console.log("Set focus.");
 		var inputName = document.getElementById('name');
 		inputName.focus();
 	},
@@ -28,6 +30,7 @@ var ClientController = {
 	},
 	
 	addClient: function(form) {
+		console.log("Add client.");
 		var client = {
 			name: form.name.value,
 			email: form.email.value,
@@ -58,27 +61,9 @@ var ClientController = {
 	showList: function () {
 		ClientService.getList(function(list) {
 			list.forEach(function(client) {
-				ClientController.addToHTML(client);
+				//ClientController.addToHTML(client);
 			});	
 		});
-	},
-	
-	addToHTML: function (client) {
-		var
-			clientList = document.getElementById('clientList'),
-			dl = document.createElement('dl'),
-			dt = ClientController.createDT(client),
-			ddName = ClientController.createDD(client.name, 'name'),
-			imgDelete = ClientController.createDelete(client),
-			ddEmail = ClientController.createDD(client.email, 'email');
-		
-		ddName.appendChild(imgDelete);
-		
-		dl.appendChild(dt);
-		dl.appendChild(ddName);
-		dl.appendChild(ddEmail);
-		
-		clientList.appendChild(dl);
 	},
 	
 	createImage: function(imageLocation) {

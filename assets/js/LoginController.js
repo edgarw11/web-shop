@@ -2,7 +2,6 @@ var LoginController = {
 	
 	init: function () {
 		LoginController.setForm();
-		LoginController.showList();
 	},
 	
 	setForm: function () {
@@ -17,7 +16,7 @@ var LoginController = {
 	},
 	
 	setFocus: function() {
-		var inputName = document.getElementById('name');
+		var inputName = document.getElementById('email');
 		inputName.focus();
 	},
 	
@@ -28,13 +27,35 @@ var LoginController = {
 	},
 	
 	logClient: function(form) {
+		console.log("logClient");
 		var client = {
 			email: form.email.value,
             password: form.password.value,
 		};
-		ClientService.add(client, function(addedClient) {
-			//LoginController.addToHTML(addedClient);
-			LoginController.clearForm();
+		console.log("email" + client.email +"pass: " + client.password);
+		LoginService.login(client, function(loggedClient) {
+			if(loggedClient.status){
+				console.log(loggedClient.message);
+				console.log(loggedClient);
+				LoginController.clearForm();
+				window.location.assign("index.php");
+			} else {
+				console.log(loggedClient.message);
+				LoginController.clearForm();
+			}
+			
+		});
+	},
+	
+	verify: function() {
+		LoginService.verify(function(verified){
+			
+			if(!verified.status){
+				console.log("Redirecting user for loging.");
+				window.location.assign("login.html");
+			} else {
+				console.log("User is already logged. " + verified.client_name);
+			}
 		});
 	}
 
