@@ -2,17 +2,6 @@ var LoginService = {
 
 	list: [],
 	
-	verify: function(callback) {
-		$.ajax({
-			type: 'GET',
-			url: 'api/verify',
-			dataType: 'json',
-			success: function(verified) {
-				callback(verified);
-			}
-		});
-	},
-	
 	login: function(client, callback) {
 		$.ajax({
 			type: 'POST',

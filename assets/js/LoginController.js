@@ -17,7 +17,8 @@ var LoginController = {
 	
 	setFocus: function() {
 		var inputName = document.getElementById('email');
-		inputName.focus();
+		if (inputName != null)
+			inputName.focus();
 	},
 	
 	clearForm: function() {
@@ -44,18 +45,6 @@ var LoginController = {
 				LoginController.clearForm();
 			}
 			
-		});
-	},
-	
-	verify: function() {
-		LoginService.verify(function(verified){
-			
-			if(!verified.status){
-				console.log("Redirecting user for loging.");
-				window.location.assign("login.html");
-			} else {
-				console.log("User is already logged. " + verified.client_name);
-			}
 		});
 	}
 
