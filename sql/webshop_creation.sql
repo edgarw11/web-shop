@@ -44,7 +44,7 @@ DROP TABLE IF EXISTS `webshop`.`products` ;
 CREATE TABLE IF NOT EXISTS `webshop`.`products` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(45) NOT NULL COMMENT '',
-  `desc` VARCHAR(255) NOT NULL COMMENT '',
+  `des` VARCHAR(255) NOT NULL COMMENT '',
   `price` DECIMAL(2) NOT NULL COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '')
 ENGINE = InnoDB;
@@ -57,9 +57,9 @@ DROP TABLE IF EXISTS `webshop`.`addresses` ;
 
 CREATE TABLE IF NOT EXISTS `webshop`.`addresses` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `desc` VARCHAR(45) NOT NULL COMMENT '',
+  `des` VARCHAR(45) NOT NULL COMMENT '',
   `street` VARCHAR(45) NOT NULL COMMENT '',
-  `number` INT NOT NULL COMMENT '',
+  `num` INT NOT NULL COMMENT '',
   `city` VARCHAR(25) NOT NULL COMMENT '',
   `zip` VARCHAR(8) NOT NULL COMMENT '',
   `clients_id` INT NOT NULL COMMENT '',
