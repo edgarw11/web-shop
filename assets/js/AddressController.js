@@ -16,7 +16,6 @@ var AddressController = {
 			//it is to avoid form submition
 			event.preventDefault();
 		});
-        //TODO: (After submit) This must probably redirect to a success page or the login page
 		AddressController.setFocus();
 	},
 	
@@ -29,7 +28,7 @@ var AddressController = {
 		var form = document.querySelector('form');
 		form.reset();        
 		AddressController.setFocus();
-		window.location.assign("index.php");
+		window.location.assign("index.html");
 	},
 	//`desc`, `street`, `number`, `city`, `zip`, `clients_id`
 	addAddress: function(form) {

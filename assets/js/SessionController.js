@@ -9,7 +9,7 @@ var SessionController = {
 		
 		SessionService.logout(function() {
 			console.log("logout success");
-			window.location.assign("index.php");
+			window.location.assign("index.html");
 		});
 	},
 	

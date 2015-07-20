@@ -39,7 +39,7 @@ var LoginController = {
 				console.log(loggedClient.message);
 				console.log(loggedClient);
 				LoginController.clearForm();
-				window.location.assign("index.php");
+				window.location.assign("index.html");
 			} else {
 				console.log(loggedClient.message);
 				LoginController.clearForm();

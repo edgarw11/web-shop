@@ -26,7 +26,7 @@ var ClientController = {
 		var form = document.querySelector('form');
 		form.reset();        
 		ClientController.setFocus();
-		window.location.assign("index.php");
+		window.location.assign("index.html");
 	},
 	
 	addClient: function(form) {

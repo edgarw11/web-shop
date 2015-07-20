@@ -3,6 +3,8 @@ require 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
 
+session_start();
+
 $app->get('/', function () {
 	echo 'APIs are up and running!';
 });
@@ -114,16 +116,35 @@ $app->post("/client", function () use ($app) {
 $app->post("/newaddress", function () use ($app) {
 	$db = getDB();
 	
-	error_log($app->request->getBody());
 	$addressobj = json_decode($app->request->getBody(), true);
-	error_log('passou pelo stringify');
+	
 	$result = $db->addresses->insert($addressobj);
-	error_log('passou pelo banco');
-	error_log($result);
 	
 	$app->response()->header("Content-Type", "application/json");
 	$resultjson = json_encode($result);
 	echo $resultjson;
+});
+
+// ########## ORDER TRACKING SERVICES  #######################
+$app->get('/orders', function () use ($app) {
+  $db = getDB();
+	error_log('orders function');
+	
+	$orders = array();
+	session_start();
+	error_log($_SESSION['client_id']);
+	foreach($db->orders()->where("clientes_id",$_SESSION['client_id']) as $order) {
+		$orders[] = array(
+			'id' => $order['id'],
+			'data_order' => $order['data_order'],
+			'data_mod' => $order['data_mod'],
+            'status' => $order['status']
+		);
+	}
+	error_log('orders function- after foreach');
+	$app->response()->header('Content-Type', 'application/json');
+	error_log(json_encode($orders));
+	echo json_encode($orders);
 });
 
 // ########## PRODUCT SERVICES  #######################
@@ -135,13 +156,58 @@ $app->get('/products', function () use ($app) {
 		$products[] = array(
 			'id' => $product['id'],
 			'name' => $product['name'],
-			'desc' => $product['desc'],
+			'desc' => $product['des'],
             'price' => $product['price']
 		);
 	}
 	
 	$app->response()->header('Content-Type', 'application/json');
 	echo json_encode($products);
+});
+
+$app->get("/product/:id", function ($id) use ($app) {
+	$db = getDB();
+	$response = "";
+	
+	$product = $db->products()->where("id", $id);
+	
+	$app->response()->header("Content-Type", "application/json");
+	echo json_encode($product);
+});
+
+// ########## CART SERVICES  #######################
+$app->get('/cart', function () use ($app) {
+	$app->response()->header('Content-Type', 'application/json');
+	echo json_encode($_SESSION['cart']);
+});
+
+$app->post("/cart", function () use ($app) {
+	
+	$product = json_decode($app->request->getBody(), true);
+	if(is_null($_SESSION['cart'])) {
+		$_SESSION['cart']=array();
+	} 
+	array_push($_SESSION['cart'], $product);
+	$app->response()->header("Content-Type", "application/json");
+	echo json_encode($product);
+});
+
+$app->delete('/cart/:id', function ($id) use ($app) {
+	
+	// foreach ($_SESSION['cart'] as $product) {
+	// 	if ($product[1]['id'] = $id) {
+	// 		unset($_SESSION['cart'][$product]);
+	// 	}
+	// }
+	for ($i = 0; $i <= count($_SESSION['cart']); $i++) {
+		$product = $_SESSION['cart'][$i];
+		if ($product[1]['id'] = $id) {
+		    array_splice($_SESSION['cart'], $i, 1);
+		}
+	}
+	
+	$app->response()->header('Content-Type', 'application/json');
+	echo json_encode($_SESSION['cart']);
 });
 
 // ########## DATABASE SERVICES  #######################
