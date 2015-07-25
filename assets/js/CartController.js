@@ -58,8 +58,8 @@ var CartController = {
 			tdPrice = document.createElement('td'),
 			tdDelete = document.createElement('td');
 			
-		tdName.innerHTML = product[1].name;
-		tdPrice.innerHTML = product[1].price;
+		tdName.innerHTML = product.name;
+		tdPrice.innerHTML = product.price;
 		tdDelete.appendChild(CartController.createDeleteImage(product));
 		tr.appendChild(tdName);
 		tr.appendChild(tdPrice);
@@ -74,7 +74,7 @@ var CartController = {
 		a.href = "#";
 		var imgRemove = CartController.createImage('assets/images/delete.gif');
 		
-		imgRemove.setAttribute('data-productid', product[1].id);
+		imgRemove.setAttribute('data-productid', product.id);
 		
 		imgRemove.addEventListener('click', function() {
 			CartController.removefromCart(this);
@@ -106,7 +106,7 @@ var CartController = {
 		chartProducts = CartService.getList();
 		
 		chartProducts.forEach(function(product){
-		    totalPrice += product[1].price;
+		    totalPrice += product.price;
 		});
 		
 		var order = {
@@ -125,7 +125,7 @@ var CartController = {
 		    chartProducts.forEach(function(product){
 			    orderProducts.push({
 			    	ordersId: order.id,
-			    	productId:product[1].id
+			    	productId: product.id
 			    });
 		    });
 		    OrderProductsService.add(orderProducts, function(orderProducts){

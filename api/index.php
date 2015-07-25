@@ -196,7 +196,8 @@ $app->get("/product/:id", function ($id) use ($app) {
 	$db = getDB();
 	$response = "";
 	
-	$product = $db->products()->where("id", $id);
+	$result = $db->products()->where("id", $id);
+	$product = $result[1];
 	
 	$app->response()->header("Content-Type", "application/json");
 	echo json_encode($product);
