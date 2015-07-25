@@ -125,7 +125,7 @@ $app->post("/newaddress", function () use ($app) {
 	echo $resultjson;
 });
 
-// ########## ORDER TRACKING SERVICES  #######################
+// ########## ORDER SERVICES  #######################
 $app->get('/orders', function () use ($app) {
   $db = getDB();
 	error_log('orders function');
@@ -146,6 +146,33 @@ $app->get('/orders', function () use ($app) {
 	error_log(json_encode($orders));
 	echo json_encode($orders);
 });
+
+$app->post("/order", function () use ($app) {
+	$db = getDB();
+	
+	$order = json_decode($app->request->getBody(), true);
+	
+	$result = $db->orders->insert($order);
+	
+	$app->response()->header("Content-Type", "application/json");
+	echo json_encode($result);
+});
+
+// ########## ORDER_HAS_PRODUCTS SERVICES  #######################
+$app->post("/orderProducts", function () use ($app) {
+	$db = getDB();
+	
+	$orderProducts = json_decode($app->request->getBody(), true);
+	$resultList = array();
+	foreach($orderProducts as $orderProduct) {
+	    $result = $db->orders_has_products->insert($orderProduct);
+	    $resultList[] = array($result);
+	}
+	
+	$app->response()->header("Content-Type", "application/json");
+	echo json_encode($resultList);
+});
+
 
 // ########## PRODUCT SERVICES  #######################
 $app->get('/products', function () use ($app) {

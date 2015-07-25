@@ -11,5 +11,17 @@ var OrderService = {
 				callback(list);
 			}
 		});
+	},
+	
+	add: function(order, callback) {
+		$.ajax({
+			type: 'POST',
+			url: 'api/order',
+			dataType: 'json',
+			data: JSON.stringify(order),
+			success: function(order) {
+				callback(order);
+			}
+		});
 	}
 }

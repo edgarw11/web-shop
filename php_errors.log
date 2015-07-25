@@ -635,3 +635,28 @@
 [20-Jul-2015 02:34:59 UTC] [{"id":"3","data_order":"2015-07-20 00:30:30","data_mod":"2015-07-20 00:30:30","status":"Finished"},{"id":"4","data_order":"2015-07-20 00:31:19","data_mod":"2015-07-20 00:31:19","status":"Finished"}]
 [20-Jul-2015 02:42:40 UTC] Login failed
 [20-Jul-2015 02:42:42 UTC] Login failed
+[20-Jul-2015 11:38:57 UTC] orders function
+[20-Jul-2015 11:38:57 UTC] 
+[20-Jul-2015 11:38:57 UTC] orders function- after foreach
+[20-Jul-2015 11:38:57 UTC] []
+[21-Jul-2015 02:44:52 UTC] orders function
+[21-Jul-2015 02:44:52 UTC] 4
+[21-Jul-2015 02:44:52 UTC] orders function- after foreach
+[21-Jul-2015 02:44:52 UTC] []
+[21-Jul-2015 02:45:46 UTC] verify login function
+[21-Jul-2015 02:45:46 UTC] session validated
+[21-Jul-2015 02:45:46 UTC] {"status":true,"client_id":"4","client_name":"Edy Segura"}
+[21-Jul-2015 20:04:25 UTC] orders function
+[21-Jul-2015 20:04:25 UTC] 
+[21-Jul-2015 20:04:25 UTC] orders function- after foreach
+[21-Jul-2015 20:04:25 UTC] []
+[21-Jul-2015 20:05:00 UTC] verify login function
+[21-Jul-2015 20:05:00 UTC] no session
+[21-Jul-2015 20:05:02 UTC] verify login function
+[21-Jul-2015 20:05:02 UTC] no session
+[21-Jul-2015 20:05:04 UTC] verify login function
+[21-Jul-2015 20:05:04 UTC] no session
+[21-Jul-2015 20:05:04 UTC] verify login function
+[21-Jul-2015 20:05:04 UTC] no session
+[21-Jul-2015 20:05:05 UTC] verify login function
+[21-Jul-2015 20:05:05 UTC] no session

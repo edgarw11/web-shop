@@ -3,7 +3,7 @@ var CartController = {
 	init: function () {
 		CartController.showList();
 		var orderButton = document.getElementById("orderButton");
-		orderButton.onclick(CartController.proceedOrder);
+		orderButton.onclick(CartController.proceedOrder());
 	},
 	
 	
@@ -102,22 +102,39 @@ var CartController = {
 	
 	proceedOrder: function(){
 		var
-		orderItens = [],
-		
+		totalPrice = 0.0,
 		chartProducts = CartService.getList();
+		
 		chartProducts.forEach(function(product){
-		    
+		    totalPrice += product[1].price;
 		});
 		
 		var order = {
 			data_order: new Date(),
 			data_mod: new Date(),
 			status: 'registered',
-			price_products: 0.0,
+			price_products: totalPrice,
 			price_shipping: 0.0,
 			discounts: 0.0,
 			clientes_id: localStorage.getItem("client_id")
 		}
+		
+		OrderService.add(order, function(order){
+		    var orderProducts = [];
+		    
+		    chartProducts.forEach(function(product){
+			    orderProducts.push({
+			    	ordersId: order.id,
+			    	productId:product[1].id
+			    });
+		    });
+		    OrderProductsService.add(orderProducts, function(orderProducts){
+		    	// TODO : Show confirmation and order Id.
+		    	alert("Order " + order.id + " was submitted successfully." )
+		    });
+		});
+		
+		
 	}
 
 };
