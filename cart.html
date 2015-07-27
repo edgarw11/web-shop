@@ -17,6 +17,28 @@
 	<h1>Cart</h1>
 </header>
 
+<form id="shippingForm">
+    <fieldset id="shippingOptions">
+        <legend>Shipping</legend>
+        
+        <label for="localCode">Local code:</label>
+        <input id="localCode" type="text" />
+    
+        <label for="shippingType">Shipping Type:</label>
+        <input type="radio" id="pac" value="PAC"/>
+        <input type="radio" id="sedex" value="Sedex"/>
+    
+        <label for="shippingDays">Shipping Days:</label>
+        <input id="shippingDays" type="text"  value="0.00"/>
+        
+        <label for="shippingPrice">Shipping Price:</label>
+        <input id="shippingPrice" type="text" value="0.00"/>
+    
+        <input type="submit" value="Calculate"/>
+    
+</fieldset>
+</form>
+
 <section id="productList"></section>
 
 <input id="orderButton" type="button" value="Proceed Order"/>
@@ -24,8 +46,10 @@
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="assets/js/OrderProductService.js"></script>
 <script src="assets/js/OrderService.js"></script>
+<script src="assets/js/CorreiosService.js"></script>
 <script src="assets/js/SessionService.js"></script>
 <script src="assets/js/SessionController.js"></script>
+<script src="assets/js/ProductService.js"></script>
 <script src="assets/js/CartService.js"></script>
 <script src="assets/js/CartController.js"></script>
 

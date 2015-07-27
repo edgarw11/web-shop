@@ -2,10 +2,27 @@ var CartController = {
 	
 	init: function () {
 		CartController.showList();
-		var orderButton = document.getElementById("orderButton");
-		orderButton.onclick(CartController.proceedOrder());
+		CartController.setOrderButton();
+		CartController.setShippingForm();
 	},
 	
+	setShippingForm: function() {
+		var shippingForm = document.getElementById('shippingForm');
+		    
+		shippingForm.addEventListener('submit', function(event) {
+		    var localCode = document.getElementById('localCode').value,
+		        pacRadio = document.getElementById('pac'),
+		        sedexRadio = document.getElementById('sedex'),
+		        daysInput = document.getElementById('shippingDays'),
+		        priceInput = document.getElementById('shippingPrice');
+		        
+		   CorreiosService.getPriceAndDays('40010', localCode, function(result) {
+		       daysInput.value = result.days;
+		       priceInput.value = result.price;
+		   });
+		   event.preventDefault();
+		});
+   },
 	
 	showList: function() {
 		CartService.getList(function(list) {
@@ -16,15 +33,20 @@ var CartController = {
 	addToHTML: function(list) {
 		var
 			productList = document.getElementById('productList'),
-			table = document.createElement('table');
+			table = document.createElement('table'),
+			totalPrice = 0.0;
 			
 		table.appendChild(CartController.createHeader());
 		
 		CartService.getList(function(list){
-		    list.forEach(function(product) {
-			    table.appendChild(CartController.createTR(product));
+		    list.forEach(function(id) {
+		    	ProductService.get(id, function(product) {
+		    	    totalPrice += product.price;
+			        table.appendChild(CartController.createTR(product));
+		    	});
 		    });	
-		});	
+		});
+		// TODO : set total price;
 		productList.appendChild(table);
 	},
 	
@@ -100,43 +122,39 @@ var CartController = {
 		})
 	},
 	
-	proceedOrder: function(){
-		var
-		totalPrice = 0.0,
-		chartProducts = CartService.getList();
+	
+	setOrderButton: function(){
+		var orderButton = document.getElementById('orderButton');
+		orderButton.addEventListener('click', function() {
+			var totalPrice = 0.0,
 		
-		chartProducts.forEach(function(product){
-		    totalPrice += product.price;
-		});
+			order = {
+				data_order: new Date(),
+				data_mod: new Date(),
+				status: 'registered',
+				priceProducts: totalPrice,
+				price_shipping: 0.0,
+				discounts: 0.0,
+				clientes_id: localStorage.getItem("client_id")
+			};
 		
-		var order = {
-			data_order: new Date(),
-			data_mod: new Date(),
-			status: 'registered',
-			price_products: totalPrice,
-			price_shipping: 0.0,
-			discounts: 0.0,
-			clientes_id: localStorage.getItem("client_id")
-		}
-		
-		OrderService.add(order, function(order){
-		    var orderProducts = [];
+			OrderService.add(order, function(order) {
+		    	var orderProducts = [];
 		    
-		    chartProducts.forEach(function(product){
-			    orderProducts.push({
-			    	ordersId: order.id,
-			    	productId: product.id
-			    });
-		    });
-		    OrderProductsService.add(orderProducts, function(orderProducts){
-		    	// TODO : Show confirmation and order Id.
-		    	alert("Order " + order.id + " was submitted successfully." )
-		    });
+		    	chartProducts.forEach(function(product) {
+			   		orderProducts.push({
+			   			ordersId: order.id,
+			   			productId: product.id
+			   		});
+		    	});
+		    	
+		    	OrderProductsService.add(orderProducts, function(orderProducts){
+		    		// TODO : Show confirmation and order Id.
+		    		alert("Order " + order.id + " was submitted successfully.");
+		    	});
+			});
 		});
-		
-		
-	}
-
+	 }
 };
 
 CartController.init();

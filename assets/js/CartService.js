@@ -1,33 +1,15 @@
 var CartService = {
 
 	add: function(id, callback) {
-		$.ajax({
-			type: 'GET',
-			url: 'api/product/'+id,
-			dataType: 'json',
-			success: function(product) {
-				$.ajax({
-					type: 'POST',
-					url: 'api/cart',
-					dataType: 'json',
-					data: JSON.stringify(product),
-					success: function(product) {
-						callback(product);
-					}
-				});
-			}
-		});
+		var cart = CartService.retrieveCartFromSession();
+		cart.productIds.push(id);
+		CartService.saveCartTosession(cart);
+		callback(id);
 	},
 	
 	getList: function(callback) {
-		$.ajax({
-			type: 'GET',
-			url: 'api/cart',
-			dataType: 'json',
-			success: function(list) {
-				callback(list?list:[]);
-			}
-		});
+		var cart = CartService.retrieveCartFromSession();
+		callback(cart.productIds);
 	},
 	
 	remove: function(id, callback) {
@@ -39,5 +21,14 @@ var CartService = {
 				callback(list);
 			}
 		});
+	},
+	
+	saveCartTosession: function(cart) {
+		sessionStorage.setItem("webShopCart", JSON.stringify(cart));	
+	},
+	
+	retrieveCartFromSession: function() {
+		var cart = JSON.parse(sessionStorage.getItem('webShopCart'));
+		return cart ? cart : {productIds: []};
 	}
 }

@@ -16,7 +16,7 @@ var OrderService = {
 	add: function(order, callback) {
 		$.ajax({
 			type: 'POST',
-			url: 'api/order',
+			url: 'api/orders',
 			dataType: 'json',
 			data: JSON.stringify(order),
 			success: function(order) {

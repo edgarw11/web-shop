@@ -11,5 +11,16 @@ var ProductService = {
 				callback(list);
 			}
 		});
+	},
+	
+	get: function(id, callback) {
+		$.ajax({
+			type: 'GET',
+			url: 'api/products/' + id,
+			dataType: 'json',
+			success: function(product) {
+				callback(product);
+			}
+		});
 	}
 }

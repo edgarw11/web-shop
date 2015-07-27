@@ -147,11 +147,10 @@ $app->get('/orders', function () use ($app) {
 	echo json_encode($orders);
 });
 
-$app->post("/order", function () use ($app) {
+$app->post("/orders", function () use ($app) {
 	$db = getDB();
 	
 	$order = json_decode($app->request->getBody(), true);
-	
 	$result = $db->orders->insert($order);
 	
 	$app->response()->header("Content-Type", "application/json");
@@ -192,7 +191,7 @@ $app->get('/products', function () use ($app) {
 	echo json_encode($products);
 });
 
-$app->get("/product/:id", function ($id) use ($app) {
+$app->get("/products/:id", function ($id) use ($app) {
 	$db = getDB();
 	$response = "";
 	
@@ -201,41 +200,6 @@ $app->get("/product/:id", function ($id) use ($app) {
 	
 	$app->response()->header("Content-Type", "application/json");
 	echo json_encode($product);
-});
-
-// ########## CART SERVICES  #######################
-$app->get('/cart', function () use ($app) {
-	$app->response()->header('Content-Type', 'application/json');
-	echo json_encode($_SESSION['cart']);
-});
-
-$app->post("/cart", function () use ($app) {
-	
-	$product = json_decode($app->request->getBody(), true);
-	if(is_null($_SESSION['cart'])) {
-		$_SESSION['cart']=array();
-	} 
-	array_push($_SESSION['cart'], $product);
-	$app->response()->header("Content-Type", "application/json");
-	echo json_encode($product);
-});
-
-$app->delete('/cart/:id', function ($id) use ($app) {
-	
-	// foreach ($_SESSION['cart'] as $product) {
-	// 	if ($product[1]['id'] = $id) {
-	// 		unset($_SESSION['cart'][$product]);
-	// 	}
-	// }
-	for ($i = 0; $i <= count($_SESSION['cart']); $i++) {
-		$product = $_SESSION['cart'][$i];
-		if ($product[1]['id'] = $id) {
-		    array_splice($_SESSION['cart'], $i, 1);
-		}
-	}
-	
-	$app->response()->header('Content-Type', 'application/json');
-	echo json_encode($_SESSION['cart']);
 });
 
 // ########## DATABASE SERVICES  #######################
