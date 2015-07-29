@@ -132,7 +132,7 @@ var CartController = {
 				data_order: new Date(),
 				data_mod: new Date(),
 				status: 'registered',
-				priceProducts: totalPrice,
+				price_products: totalPrice,
 				price_shipping: 0.0,
 				discounts: 0.0,
 				clientes_id: localStorage.getItem("client_id")

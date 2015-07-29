@@ -660,3 +660,25 @@
 [21-Jul-2015 20:05:04 UTC] no session
 [21-Jul-2015 20:05:05 UTC] verify login function
 [21-Jul-2015 20:05:05 UTC] no session
+[27-Jul-2015 18:32:06 UTC] orders function
+[27-Jul-2015 18:32:06 UTC] 4
+[27-Jul-2015 18:32:06 UTC] orders function- after foreach
+[27-Jul-2015 18:32:06 UTC] [{"id":"5","data_order":"2015-07-27 18:31:47","data_mod":"2015-07-27 18:31:47","status":"registered"},{"id":"6","data_order":"2015-07-27 18:31:54","data_mod":"2015-07-27 18:31:54","status":"registered"}]
+[28-Jul-2015 01:50:46 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx' : Premature end of data in tag html line 3
+ in /home/ubuntu/workspace/api/index.php on line 208
+[28-Jul-2015 13:30:06 UTC] orders function
+[28-Jul-2015 13:30:06 UTC] 4
+[28-Jul-2015 13:30:06 UTC] orders function- after foreach
+[28-Jul-2015 13:30:06 UTC] [{"id":"5","data_order":"2015-07-27 18:31:47","data_mod":"2015-07-27 18:31:47","status":"registered"},{"id":"6","data_order":"2015-07-27 18:31:54","data_mod":"2015-07-27 18:31:54","status":"registered"}]
+[28-Jul-2015 13:31:10 UTC] verify login function
+[28-Jul-2015 13:31:10 UTC] session validated
+[28-Jul-2015 13:31:10 UTC] {"status":true,"client_id":"4","client_name":"Edy Segura"}
+[28-Jul-2015 13:32:16 UTC] orders function
+[28-Jul-2015 13:32:16 UTC] 4
+[28-Jul-2015 13:32:16 UTC] orders function- after foreach
+[28-Jul-2015 13:32:16 UTC] [{"id":"5","data_order":"2015-07-27 18:31:47","data_mod":"2015-07-27 18:31:47","status":"registered"},{"id":"6","data_order":"2015-07-27 18:31:54","data_mod":"2015-07-27 18:31:54","status":"registered"},{"id":"7","data_order":"2015-07-28 13:31:53","data_mod":"2015-07-28 13:31:53","status":"registered"},{"id":"8","data_order":"2015-07-28 13:31:58","data_mod":"2015-07-28 13:31:58","status":"registered"},{"id":"9","data_order":"2015-07-28 13:32:11","data_mod":"2015-07-28 13:32:11","status":"registered"}]
+[28-Jul-2015 13:38:03 UTC] orders function
+[28-Jul-2015 13:38:03 UTC] 
+[28-Jul-2015 13:38:03 UTC] orders function- after foreach
+[28-Jul-2015 13:38:03 UTC] []
+[29-Jul-2015 10:56:13 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/ubuntu/workspace/api/index.php on line 208

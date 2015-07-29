@@ -151,6 +151,7 @@ $app->post("/orders", function () use ($app) {
 	$db = getDB();
 	
 	$order = json_decode($app->request->getBody(), true);
+	echo($order);
 	$result = $db->orders->insert($order);
 	
 	$app->response()->header("Content-Type", "application/json");
@@ -200,6 +201,32 @@ $app->get("/products/:id", function ($id) use ($app) {
 	
 	$app->response()->header("Content-Type", "application/json");
 	echo json_encode($product);
+});
+
+// ########## SHIPPING SERVICES  #######################
+$app->get("/shipping/:serviceCode/:postalCode", function ($serviceCode, $postalcode) use ($app) {
+	
+	$soapClient = new SoapClient("http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL");
+	$parameters = array('CalcPrecoPrazo' => array(
+		'nCdServico' => $serviceCode,
+		'sCepOrigem' => '3754000',
+		'sCepDestino' => $postalcode,
+		'nCdEmpresa' => '', 	
+        'sDsSenha' => '', 	
+        'nVlPeso' => '0', 	
+        'nCdFormato' => '1', 	
+        'nVlComprimento' => '16', 	
+        'nVlAltura' => '2', 	
+        'nVlLargura' => '11', 	
+        'nVlDiametro' => '0', 	
+        'sCdMaoPropria' => '', 	
+        'nVlValorDeclarado' => '0', 	
+        'sCdAvisoRecebimento' => ''
+	));
+		
+	$result = $soapClient->__soapCall("CalcPrecoPrazo", $parameters);
+	$app->response()->header("Content-Type", "application/json");
+	echo json_encode($result);
 });
 
 // ########## DATABASE SERVICES  #######################
