@@ -682,3 +682,7 @@
 [28-Jul-2015 13:38:03 UTC] orders function- after foreach
 [28-Jul-2015 13:38:03 UTC] []
 [29-Jul-2015 10:56:13 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/ubuntu/workspace/api/index.php on line 208
+[30-Jul-2015 20:55:18 UTC] orders function
+[30-Jul-2015 20:55:18 UTC] 4
+[30-Jul-2015 20:55:18 UTC] orders function- after foreach
+[30-Jul-2015 20:55:18 UTC] [{"id":"5","data_order":"2015-07-27 18:31:47","data_mod":"2015-07-27 18:31:47","status":"registered"},{"id":"6","data_order":"2015-07-27 18:31:54","data_mod":"2015-07-27 18:31:54","status":"registered"},{"id":"7","data_order":"2015-07-28 13:31:53","data_mod":"2015-07-28 13:31:53","status":"registered"},{"id":"8","data_order":"2015-07-28 13:31:58","data_mod":"2015-07-28 13:31:58","status":"registered"},{"id":"9","data_order":"2015-07-28 13:32:11","data_mod":"2015-07-28 13:32:11","status":"registered"}]

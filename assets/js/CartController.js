@@ -10,19 +10,28 @@ var CartController = {
 		var shippingForm = document.getElementById('shippingForm');
 		    
 		shippingForm.addEventListener('submit', function(event) {
-		    var localCode = document.getElementById('localCode').value,
-		        pacRadio = document.getElementById('pac'),
-		        sedexRadio = document.getElementById('sedex'),
-		        daysInput = document.getElementById('shippingDays'),
-		        priceInput = document.getElementById('shippingPrice');
+			var localCode = document.getElementById('localCode').value,
+				typeInputs = document.getElementsByName('shippingType'),
+				shippingType,
+				i;
+				
+			for(i = 0; i < typeInputs.length; i++) {
+				if (typeInputs[i].checked) {
+					shippingType = typeInputs[i].value;
+					break;
+				}
+			}
 		        
-		   CorreiosService.getPriceAndDays('40010', localCode, function(result) {
-		       daysInput.value = result.days;
-		       priceInput.value = result.price;
-		   });
-		   event.preventDefault();
+			CorreiosService.getPriceAndDays(shippingType, localCode, function(result) {
+				var daysInput = document.getElementById('shippingDays'),
+					priceInput = document.getElementById('shippingPrice');
+				daysInput.value = result.days;
+				priceInput.value = result.price;
+			});
+			
+			event.preventDefault();
 		});
-   },
+	},
 	
 	showList: function() {
 		CartService.getList(function(list) {
