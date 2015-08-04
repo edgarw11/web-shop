@@ -161,14 +161,18 @@ var CartController = {
 			};
 		
 			OrderService.add(order, function(order) {
-		    	var orderProducts = [];
+		    	
 		    
-		    	chartProducts.forEach(function(product) {
+		    CartService.getList(function(list){
+		    list.forEach(function(id) {
+		    	ProductService.get(id, function(product) {
 			   		orderProducts.push({
 			   			ordersId: order.id,
 			   			productId: product.id
 			   		});
 		    	});
+		    });
+		    });
 		    	
 		    	OrderProductsService.add(orderProducts, function(orderProducts){
 		    		// TODO : Show confirmation and order Id.

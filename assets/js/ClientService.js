@@ -12,7 +12,7 @@ var ClientService = {
 				console.log('Client created!');
 				callback(addedClient);
 			},
-			error: function() {
+			error: function(error) {
 				console.log('Error to add client ' + client.name);
 			}
 		});

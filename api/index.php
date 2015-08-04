@@ -141,9 +141,7 @@ $app->get('/orders', function () use ($app) {
             'status' => $order['status']
 		);
 	}
-	error_log('orders function- after foreach');
 	$app->response()->header('Content-Type', 'application/json');
-	error_log(json_encode($orders));
 	echo json_encode($orders);
 });
 
@@ -151,7 +149,6 @@ $app->post("/orders", function () use ($app) {
 	$db = getDB();
 	
 	$order = json_decode($app->request->getBody(), true);
-	echo($order);
 	$result = $db->orders->insert($order);
 	
 	$app->response()->header("Content-Type", "application/json");

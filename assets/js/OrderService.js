@@ -23,7 +23,7 @@ var OrderService = {
 				callback(order);
 			},
 			error: function(error) {
-				console.log(error.responseText);
+				console.log();
 			}
 		});
 	}
