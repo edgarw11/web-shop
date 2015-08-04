@@ -10,16 +10,28 @@ var CartController = {
 		var shippingForm = document.getElementById('shippingForm');
 		    
 		shippingForm.addEventListener('submit', function(event) {
+			event.preventDefault();
+			
 			var localCode = document.getElementById('localCode').value,
 				typeInputs = document.getElementsByName('shippingType'),
 				shippingType,
 				i;
+				
+			if (!localCode) {
+				alert('Please enter a valid Local Code.');
+				return;
+			}
 				
 			for(i = 0; i < typeInputs.length; i++) {
 				if (typeInputs[i].checked) {
 					shippingType = typeInputs[i].value;
 					break;
 				}
+			}
+			
+			if (!shippingType) {
+				alert('Please select a Shipping Type.');
+				return;
 			}
 		        
 			CorreiosService.getPriceAndDays(shippingType, localCode, function(result) {
@@ -29,7 +41,7 @@ var CartController = {
 				priceInput.value = result.price;
 			});
 			
-			event.preventDefault();
+		
 		});
 	},
 	
@@ -135,6 +147,7 @@ var CartController = {
 	setOrderButton: function(){
 		var orderButton = document.getElementById('orderButton');
 		orderButton.addEventListener('click', function() {
+			SessionController.verify();
 			var totalPrice = 0.0,
 		
 			order = {

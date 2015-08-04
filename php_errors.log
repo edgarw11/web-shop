@@ -686,3 +686,42 @@
 [30-Jul-2015 20:55:18 UTC] 4
 [30-Jul-2015 20:55:18 UTC] orders function- after foreach
 [30-Jul-2015 20:55:18 UTC] [{"id":"5","data_order":"2015-07-27 18:31:47","data_mod":"2015-07-27 18:31:47","status":"registered"},{"id":"6","data_order":"2015-07-27 18:31:54","data_mod":"2015-07-27 18:31:54","status":"registered"},{"id":"7","data_order":"2015-07-28 13:31:53","data_mod":"2015-07-28 13:31:53","status":"registered"},{"id":"8","data_order":"2015-07-28 13:31:58","data_mod":"2015-07-28 13:31:58","status":"registered"},{"id":"9","data_order":"2015-07-28 13:32:11","data_mod":"2015-07-28 13:32:11","status":"registered"}]
+[03-Aug-2015 02:52:21 UTC] orders function
+[03-Aug-2015 02:52:21 UTC] 2
+[03-Aug-2015 02:52:21 UTC] orders function- after foreach
+[03-Aug-2015 02:52:21 UTC] [{"id":"3","data_order":"2015-07-20 00:30:30","data_mod":"2015-07-20 00:30:30","status":"Finished"},{"id":"4","data_order":"2015-07-20 00:31:19","data_mod":"2015-07-20 00:31:19","status":"Finished"}]
+[04-Aug-2015 00:42:57 UTC] verify login function
+[04-Aug-2015 00:42:57 UTC] no session
+[04-Aug-2015 00:43:11 UTC] Login failed
+[04-Aug-2015 01:08:37 UTC] verify login function
+[04-Aug-2015 01:08:37 UTC] session validated
+[04-Aug-2015 01:08:37 UTC] {"status":true,"client_id":"5","client_name":"marcelomarcatto"}
+[04-Aug-2015 01:10:38 UTC] verify login function
+[04-Aug-2015 01:10:38 UTC] session validated
+[04-Aug-2015 01:10:38 UTC] {"status":true,"client_id":"5","client_name":"marcelomarcatto"}
+[04-Aug-2015 01:10:44 UTC] verify login function
+[04-Aug-2015 01:10:44 UTC] session validated
+[04-Aug-2015 01:10:44 UTC] {"status":true,"client_id":"5","client_name":"marcelomarcatto"}
+[04-Aug-2015 01:11:35 UTC] verify login function
+[04-Aug-2015 01:11:35 UTC] session validated
+[04-Aug-2015 01:11:35 UTC] {"status":true,"client_id":"5","client_name":"marcelomarcatto"}
+[04-Aug-2015 01:11:46 UTC] verify login function
+[04-Aug-2015 01:11:46 UTC] session validated
+[04-Aug-2015 01:11:46 UTC] {"status":true,"client_id":"5","client_name":"marcelomarcatto"}
+[04-Aug-2015 01:11:49 UTC] verify login function
+[04-Aug-2015 01:11:49 UTC] session validated
+[04-Aug-2015 01:11:49 UTC] {"status":true,"client_id":"5","client_name":"marcelomarcatto"}
+[04-Aug-2015 01:12:11 UTC] verify login function
+[04-Aug-2015 01:12:11 UTC] session validated
+[04-Aug-2015 01:12:11 UTC] {"status":true,"client_id":"5","client_name":"marcelomarcatto"}
+[04-Aug-2015 01:12:43 UTC] verify login function
+[04-Aug-2015 01:12:43 UTC] session validated
+[04-Aug-2015 01:12:43 UTC] {"status":true,"client_id":"5","client_name":"marcelomarcatto"}
+[04-Aug-2015 01:15:06 UTC] verify login function
+[04-Aug-2015 01:15:06 UTC] no session
+[04-Aug-2015 01:15:24 UTC] verify login function
+[04-Aug-2015 01:15:24 UTC] session validated
+[04-Aug-2015 01:15:24 UTC] {"status":true,"client_id":"5","client_name":"marcelomarcatto"}
+[04-Aug-2015 01:16:21 UTC] verify login function
+[04-Aug-2015 01:16:21 UTC] session validated
+[04-Aug-2015 01:16:21 UTC] {"status":true,"client_id":"5","client_name":"marcelomarcatto"}

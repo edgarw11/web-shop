@@ -21,6 +21,9 @@ var OrderService = {
 			data: JSON.stringify(order),
 			success: function(order) {
 				callback(order);
+			},
+			error: function(error) {
+				console.log(error.responseText);
 			}
 		});
 	}
